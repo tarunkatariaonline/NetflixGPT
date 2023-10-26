@@ -1,7 +1,7 @@
 import * as React from "react"
 import {
   ChakraProvider,
-  Box,
+
 
   theme,
 } from "@chakra-ui/react"
@@ -9,8 +9,6 @@ import { BrowserRouter as Router, Route,Routes } from "react-router-dom"
 import LoginPage from "./LoginPage"
 import Home from "./Home"
 import ErrorPage from "./ErrorPage"
-
-
 
 export const App = () => (
   <ChakraProvider theme={theme}>
