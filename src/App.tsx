@@ -1,4 +1,4 @@
-import * as React from "react"
+
 import {
   ChakraProvider,
 
@@ -11,6 +11,7 @@ import Home from "./Home"
 import ErrorPage from "./ErrorPage"
 
 export const App = () => (
+  
   <ChakraProvider theme={theme}>
    
    <Router>

@@ -10,14 +10,18 @@ import { addUserDetails } from './Redux/Slice/userInfoSlice';
 import { useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
 import Header from './Header';
+import { MainContainer } from './MainContainer';
+import SecondContainer from './SecondContainer';
+import useNowPlayingMovie from './Hooks/useNowPlayingMovie';
 const Home = () => {
   const app = initializeApp(firebaseConfig);
   const auth = getAuth()
   const analytics = getAnalytics(app);
   const dispatch = useDispatch();
   const navicate = useNavigate()
+  useNowPlayingMovie()
   useEffect(()=>{
-   
+    
     onAuthStateChanged(auth, (user) => {
       if (user) {
         // User is signed in, see docs for a list of available properties
@@ -39,14 +43,17 @@ const Home = () => {
         navicate('/')
       } 
     });
+
+
   },[])
   return (
     
-    <Box w={"100%"} h={"100vh"} bgColor={"black"} >
+    <Box w={"100%"} h={"100vh"} bgColor={"white"} >
+      <Box pos={"absolute"} top={"0px"} w={"100%"} zIndex={10}>
   <Header/>
-  <Box h={"88vh"} w={"100%"} bgColor={"white"}>
-
   </Box>
+  <MainContainer/>
+  <SecondContainer/>
     </Box>
   )
 }

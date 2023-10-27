@@ -14,3 +14,10 @@ export const firebaseConfig = {
   measurementId: "G-6318GCP12E"
 };
 // Initialize Firebase
+export const movieOptionsApi = {
+  method: 'GET',
+  headers: {
+    accept: 'application/json',
+    Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxOWRjOTk5ODhjMGEyYmNlZWI1M2YyZGM3ODI3MWU3MiIsInN1YiI6IjY1M2JlMzBjNTY0ZWM3MDBlNWZhMzViNyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.WT0gaea5bT5WzVF7kvpeFZDT59mfFx0Hu18ofiiQHMM'
+  }
+};
