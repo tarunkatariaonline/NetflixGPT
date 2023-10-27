@@ -42,8 +42,11 @@ const Home = () => {
   },[])
   return (
     
-    <Box w={"100%"} h={"120vh"} bgColor={"blackAlpha.900"} >
+    <Box w={"100%"} h={"100vh"} bgColor={"black"} >
   <Header/>
+  <Box h={"88vh"} w={"100%"} bgColor={"white"}>
+
+  </Box>
     </Box>
   )
 }
