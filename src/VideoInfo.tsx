@@ -13,7 +13,7 @@ const VideoInfo = () => {
    <Box pos={"absolute"} display={"flex"}  alignItems={"center"}  top={"0%"} bgColor={"blackAlpha.700"}  left={"0%"} bottom={"0%"} right={"0%"} zIndex={15}>
     <VStack justifyContent={"flex-start"} alignItems={"flex-start"}>
         <Text mx={"20px"} color={"white"} fontSize={"30px"} fontWeight={"bold"}>{(videoInfo?.title)}</Text>
-        <Text mx={"20px"} color={"white"} display={["none","block"]} w={"400px"}>{videoInfo?.overview}</Text>
+        <Text mx={"20px"} color={"white"} display={["none","block"]} maxH={"150px"} overflow={"hidden"} w={"400px"}>{videoInfo?.overview}</Text>
 
         <HStack >
             <Button  mx={"20px"} px={"20px"}>PLAY <Text mx={"5px"}> <AiFillPlayCircle fontSize={"20px"} /> </Text></Button>

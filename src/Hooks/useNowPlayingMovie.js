@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 import { movieOptionsApi } from '../Utils/firebase';
 import { useDispatch } from 'react-redux';
 import { addVideo } from '../Redux/Slice/mainVideoSlice';
+import { addMovie } from '../Redux/Slice/movieSlice';
 
 
 const useNowPlayingMovie = () => {
@@ -23,6 +24,8 @@ const useNowPlayingMovie = () => {
  const fetchMovie = async()=>{
    const res = await fetch('https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=1',movieOptionsApi);
    const json = await res.json()
+//    console.log(json.results);
+   dispatch(addMovie(json.results))
  
 
     // fetchMovieVideo(json.results[0].id);
@@ -33,7 +36,7 @@ const useNowPlayingMovie = () => {
 
     
     const videoLink =  await fetchMovieVideo(json?.results[randomNumber]?.id);
-    console.log(videoLink)
+    // console.log(videoLink)
     dispatch(addVideo({
         id,
        title,

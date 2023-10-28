@@ -13,6 +13,8 @@ import Header from './Header';
 import { MainContainer } from './MainContainer';
 import SecondContainer from './SecondContainer';
 import useNowPlayingMovie from './Hooks/useNowPlayingMovie';
+import usePopularMovies from './Hooks/usePopularMovies';
+import useTopRatedMovies from './Hooks/useTopRatedMovies';
 const Home = () => {
   const app = initializeApp(firebaseConfig);
   const auth = getAuth()
@@ -20,6 +22,8 @@ const Home = () => {
   const dispatch = useDispatch();
   const navicate = useNavigate()
   useNowPlayingMovie()
+  usePopularMovies();
+  useTopRatedMovies();
   useEffect(()=>{
     
     onAuthStateChanged(auth, (user) => {
