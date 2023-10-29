@@ -4,13 +4,15 @@ import mainVideoReducer from './Slice/mainVideoSlice'
 import movieReducer from './Slice/movieSlice'
 import popularMovieReducer from './Slice/popularMovieSlice'
 import topRatedMovieReducer from './Slice/topRatedMovieSlice'
+import showGptPageReducer from './Slice/showGptPageSlice'
 export const store = configureStore({
   reducer: {
     userInfo:userInfoReducer,
     mainVideo:mainVideoReducer,
     movie:movieReducer,
     popularMovies:popularMovieReducer,
-    topRatedMovies:topRatedMovieReducer
+    topRatedMovies:topRatedMovieReducer,
+    showGptPage:showGptPageReducer
     
     
   },

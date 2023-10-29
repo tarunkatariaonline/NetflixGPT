@@ -5,7 +5,7 @@ import 'react-multi-carousel/lib/styles.css';
 interface MovieData{
     id:number,
     original_title:string,
-    poster_path:string,
+    poster_path:string|null,
     overview:string,
     title:string,
     popularity:string,
@@ -53,7 +53,7 @@ const MovieSlider = ({title,movie}:Props) => {
        
        
        {movie.map((item)=>{
-        return   <Box key={item.id} cursor={"pointer"} css={":hover{border:2px solid red}"}  zIndex={25} mx={"10px"} bgImage={"https://image.tmdb.org/t/p/original/"+item.poster_path} backgroundRepeat={"no-repeat"} backgroundSize={"cover"}   my={"20px"} w={["120px","140px"]} h={["200px"]} bgColor={"yellow"}></Box>
+        return  (item.poster_path&&<Box key={item.id} cursor={"pointer"} css={":hover{border:2px solid red}"}  zIndex={25} mx={"10px"} bgImage={"https://image.tmdb.org/t/p/original/"+item.poster_path} backgroundRepeat={"no-repeat"} backgroundSize={"cover"}   my={"20px"} w={["120px","140px"]} h={["200px"]} bgColor={"yellow"}></Box>) 
        })}
       
        

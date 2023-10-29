@@ -7,8 +7,8 @@ const SecondContainer = () => {
   const movie = useSelector((state:any)=>state.movie.data);
   const popularMovies = useSelector((state:any)=>state.popularMovies.data);
   const topRatedMovies = useSelector((state:any)=>state.topRatedMovies.data);
-  console.log("Popular Movies")
-  console.log(popularMovies)
+  // console.log("Popular Movies")
+  // console.log(popularMovies)
   // console.log("Movie Data")
   // console.log(movie)
   

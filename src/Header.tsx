@@ -10,6 +10,7 @@ import { useDispatch } from 'react-redux';
 import { removeUserDetails } from './Redux/Slice/userInfoSlice';
 import {AiOutlineSearch} from 'react-icons/ai'
 import {BiDownArrow} from 'react-icons/bi'
+import { setShowGptPage } from './Redux/Slice/showGptPageSlice';
 
 const Header = () => {
   const app = initializeApp(firebaseConfig);
@@ -55,7 +56,9 @@ const logOutHandler = ()=>{
 
 
    {(userInfo)&&<HStack>
-      <Button variant={"unstyled"}  color={"white"}><AiOutlineSearch fontSize={"25px"}/></Button>
+      <Button size={"sm"} onClick={()=>{
+        dispatch(setShowGptPage())
+      }} bgColor={"red.600"} css={":hover{color:black}"}  color={"white"}> <Text mx={"5px"}>GPT SEARCH </Text> <AiOutlineSearch  fontSize={"20px"}/></Button>
       <Button mr={"10px"} variant={"unstyled"} onClick={()=>{
         setShowDrawer(!showDrawer);
       }} >

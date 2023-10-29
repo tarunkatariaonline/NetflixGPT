@@ -4,7 +4,7 @@ import { firebaseConfig } from './Utils/firebase';
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
 import { getAuth,onAuthStateChanged } from 'firebase/auth';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { addUserDetails } from './Redux/Slice/userInfoSlice';
 
 import { useNavigate } from 'react-router-dom';
@@ -15,6 +15,7 @@ import SecondContainer from './SecondContainer';
 import useNowPlayingMovie from './Hooks/useNowPlayingMovie';
 import usePopularMovies from './Hooks/usePopularMovies';
 import useTopRatedMovies from './Hooks/useTopRatedMovies';
+import SearchGptPage from './SearchGptPage';
 const Home = () => {
   const app = initializeApp(firebaseConfig);
   const auth = getAuth()
@@ -24,6 +25,8 @@ const Home = () => {
   useNowPlayingMovie()
   usePopularMovies();
   useTopRatedMovies();
+  const showGpt = useSelector((state:any)=>state.showGptPage.value)
+  // console.log(showGpt)
   useEffect(()=>{
     
     onAuthStateChanged(auth, (user) => {
@@ -51,14 +54,17 @@ const Home = () => {
 
   },[])
   return (
-    
-    <Box w={"100%"} h={"100vh"} bgColor={"white"} >
+
+<>
+{!(showGpt)?<Box w={"100%"} h={"100vh"} bgColor={"white"} >
       <Box pos={"absolute"} top={"0px"} w={"100%"} zIndex={10}>
   <Header/>
   </Box>
   <MainContainer/>
   <SecondContainer/>
-    </Box>
+    </Box>:<SearchGptPage/>}
+    
+    </>  
   )
 }
 

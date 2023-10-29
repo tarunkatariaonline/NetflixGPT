@@ -8,7 +8,7 @@ import { addMovie } from '../Redux/Slice/movieSlice';
 const useNowPlayingMovie = () => {
  const dispatch = useDispatch();
     const fetchMovieVideo = async(id)=>{
-        console.log("I am in Video")
+      //   console.log("I am in Video")
      const res  = await fetch(`https://api.themoviedb.org/3/movie/${id}/videos?language=en-US`,movieOptionsApi)
      const json = await res.json();
      const video = json.results.filter((item)=>item.type==="Trailer");
@@ -32,7 +32,10 @@ const useNowPlayingMovie = () => {
     var randomNumber = (Math.random() * 20 ).toFixed();
     
     // console.log(json?.results[randomNumber])
-    const {title,overview,id} = json?.results[randomNumber];
+    const id = json?.results[randomNumber]?.id;
+    const overview = json?.results[randomNumber]?.overview;
+
+    const title = json?.results[randomNumber]?.title;
 
     
     const videoLink =  await fetchMovieVideo(json?.results[randomNumber]?.id);
