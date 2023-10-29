@@ -6,7 +6,9 @@ import { useSelector } from 'react-redux'
 const VideoContainer = () => {
   const videoInfo = useSelector((state:any)=>state?.mainVideo?.data);
   // console.log(videoInfo)
-  
+
+
+ 
   return (
    <Box w={"100%"}  zIndex={1} position={"relative"} bgColor={"yellow"}  paddingBottom={"56.26%"} >
      <VideoInfo/>

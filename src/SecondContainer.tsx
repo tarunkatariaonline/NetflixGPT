@@ -13,9 +13,9 @@ const SecondContainer = () => {
   // console.log(movie)
   
   return (
-   <Box w={"100%"} h={"130vh"}  bgColor={"black"} color={"yellow"}>
+   <Box w={"100%"}   bgColor={"black"} color={"yellow"}>
      
-     <Box  w={"100%"} h={"100vh"} position={"relative"} zIndex={12} top={"-30%"} bgColor={"blackAlpha.100"}>
+     <Box  w={"100%"} position={"relative"} zIndex={12} top={["0","-30%"]} bgColor={"blackAlpha.100"}>
   
    {movie&&<MovieSlider title={"Tranding Movies"} movie={movie} />}
    {popularMovies&&<MovieSlider title={"Popular Movies "} movie={popularMovies} />}

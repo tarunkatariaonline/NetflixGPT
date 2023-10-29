@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Box, Input ,HStack, Button, Image} from '@chakra-ui/react'
+import { Box, Input ,HStack, Button, Image,VStack,Spinner,Text} from '@chakra-ui/react'
 import Header from './Header'
 import OpenAI from 'openai';
 import { json } from 'react-router-dom';
@@ -7,13 +7,15 @@ import { movieOptionsApi } from './Utils/firebase';
 import { useDispatch, useSelector } from 'react-redux';
 import { setSuggestionMovies } from './Redux/Slice/showGptPageSlice';
 import MovieSlider from './MovieSlider';
+import Loader from './Loader';
 const openai = new OpenAI({
-    apiKey: "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", 
+    apiKey: process.env.REACT_APP_OPEN_AI_API_KEY, 
     // defaults to process.env["OPENAI_API_KEY"]
     dangerouslyAllowBrowser: true 
   });
 const SearchGptPage = () => {
     const dispatch = useDispatch();
+    const [loader,setLoader] = useState<boolean>(false);
     const gptSearchTextList = useSelector((state:any)=>state?.showGptPage?.searchSuggestionTextList)
     const gptSearchMovieList = useSelector((state:any)=>state?.showGptPage?.searchMovieResult)
     // console.log(gptSearchMovieList)
@@ -31,18 +33,23 @@ const SearchGptPage = () => {
    
    
     const gptHandler = async()=>{
-  //       console.log("I am in Gpt handler")
-  //       const chatCompletion = await openai.chat.completions.create({
-  //           messages: [{ role: 'user', content: 'Say this is a test' }],
-  //           model: 'gpt-3.5-turbo',
-  //         });
+      setLoader(true);
+        console.log("I am in Gpt handler")
+        const gptQuery = "Act as a Movie Recommendation System and suggest some for the Query "+searchText+". only give me names of 5 movies, comma seperated like the example result given ahead . Example Result: Gadar, sholay, Koi Mil gaya, Don,  Golmaal ";
+        const chatCompletion = await openai.chat.completions.create({
+            messages: [{ role: 'assistant', content: gptQuery }],
+            model: 'gpt-3.5-turbo',
+          });
 
-          
-  // console.log(chatCompletion.choices);
-      let suggestList = [searchText];
-
-      // suggestList = ["gadar","pathaan","jawan"]
+          let suggestList = [searchText];
+  console.log(chatCompletion.choices[0]?.message.content);
+     
        
+  if(chatCompletion.choices[0].message.content){
+suggestList = chatCompletion.choices[0].message.content.split(",")
+       
+  }
+      
       
       const searchList = suggestList.map((item)=>{
            return searchMovieFetch(item);
@@ -54,6 +61,7 @@ const SearchGptPage = () => {
       searchSuggestionTextList:suggestList
       ,searchMovieResult:searchResult}))
      
+      setLoader(false)
 
 
     }
@@ -62,7 +70,9 @@ const SearchGptPage = () => {
     <Box w={"100%"}    h={"100vh"} bgColor={"yellow"}>
 
       <Image  w={"100%"} position={"fixed"} top={'0'} src='https://miro.medium.com/v2/resize:fit:1400/1*5lyavS59mazOFnb55Z6znQ.png' h={"100%"}/>
-      <Header/>
+    
+    <Box pos={"relative"} zIndex={"5"}>
+       <Header/></Box>
          
          <form onSubmit={(e)=>{
            e.preventDefault();
@@ -73,7 +83,7 @@ const SearchGptPage = () => {
          }}>
          <HStack justifyContent={"center"} w={"100%"} pos={"relative"} zIndex={"2"} >
          <HStack bgColor={"gray.900"} my={"10px"} border={"1px solid white"}  borderRadius={"10px"} w={"60%"} h={"70px"} px={"20px"}>
-      <Input value={searchText} onChange={(e)=>{
+      <Input placeholder='Search Movies Here ' value={searchText} onChange={(e)=>{
        setSearchText(e.target.value)
       }} type='text' borderColor={"whiteAlpha.500"} h={"40px"}  bgColor={"white"} />
       <Button type="submit" colorScheme="red">Search</Button>
@@ -83,16 +93,24 @@ const SearchGptPage = () => {
 
 
       
-      <HStack w={"100%"} justifyContent={"center"} pos={"relative"} zIndex={"2"} >
 
-       <Box w={"95%"}    bgColor={"blackAlpha.800"} >
+      {loader? <HStack justifyContent={"center"}> <Box position={"relative"} w={["100%","95%"]}  zIndex={"2"}>  <Box h={"80%"} w={"100%"}  bgColor={"blackAlpha.800"}>
+      <VStack w={"100%"} h={["300px","72vh"]} justifyContent={"center"} alignItems={"center"}>
+      <Spinner h={"100px"}  w={"100px"} color='red.500' />
+      <Text color={"red.500"} fontWeight={"bold"} fontSize={"18px"}>Please Wait It Can Take Little Bit Time Because We Are Using An AI To Recommend Movie .</Text>
+      </VStack>
 
-       
-  {(gptSearchTextList)?gptSearchTextList.map((movieName:any,index:any)=>{
-    return <MovieSlider key={movieName} title={movieName.toUpperCase()} movie={gptSearchMovieList[index]}/>
-  }):""}  
-       </Box>
-       </HStack>
+    </Box> </Box> </HStack>: <HStack w={"100%"} justifyContent={"center"} pos={"relative"} zIndex={"2"} >
+
+<Box w={["100%","95%"]}    bgColor={"blackAlpha.800"} >
+
+
+{(gptSearchTextList)?gptSearchTextList.map((movieName:any,index:any)=>{
+return <MovieSlider key={movieName} title={movieName.toUpperCase()} movie={gptSearchMovieList[index]}/>
+}):""}  
+</Box>
+</HStack>}
+     
       </Box>
   )
 }

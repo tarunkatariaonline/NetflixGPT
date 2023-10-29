@@ -16,6 +16,7 @@ import useNowPlayingMovie from './Hooks/useNowPlayingMovie';
 import usePopularMovies from './Hooks/usePopularMovies';
 import useTopRatedMovies from './Hooks/useTopRatedMovies';
 import SearchGptPage from './SearchGptPage';
+import Loader from './Loader';
 const Home = () => {
   const app = initializeApp(firebaseConfig);
   const auth = getAuth()
@@ -26,7 +27,9 @@ const Home = () => {
   usePopularMovies();
   useTopRatedMovies();
   const showGpt = useSelector((state:any)=>state.showGptPage.value)
+  const videoInfo = useSelector((state:any)=>state?.mainVideo?.data);
   // console.log(showGpt)
+
   useEffect(()=>{
     
     onAuthStateChanged(auth, (user) => {
@@ -53,6 +56,10 @@ const Home = () => {
 
 
   },[])
+
+  if(videoInfo===null){
+    return <Loader/>
+  }
   return (
 
 <>
