@@ -11,6 +11,7 @@ import { removeUserDetails } from './Redux/Slice/userInfoSlice';
 import {AiOutlineSearch} from 'react-icons/ai'
 import {BiDownArrow} from 'react-icons/bi'
 import { setShowGptPage } from './Redux/Slice/showGptPageSlice';
+import { Link } from 'react-router-dom';
 
 const Header = () => {
   const app = initializeApp(firebaseConfig);
@@ -38,7 +39,8 @@ const logOutHandler = ()=>{
     <Box h={"70px"} w={"100%"}  bgColor={"blackAlpha.600"}  shadow={"dark-lg"} display={"flex"}  alignItems={"center"} justifyContent={"space-between"}>
 
       <HStack >
-      <Image src='https://upload.wikimedia.org/wikipedia/commons/7/7a/Logonetflix.png' h={"40px"} mx={"10px"}/>
+        <Link to={'/browse'}  >
+      <Image src='https://upload.wikimedia.org/wikipedia/commons/7/7a/Logonetflix.png' h={"40px"} mx={"10px"}/> </Link>
 
        
        {/* <HStack>
@@ -56,9 +58,7 @@ const logOutHandler = ()=>{
 
 
    {(userInfo)&&<HStack>
-      <Button size={"sm"} onClick={()=>{
-        dispatch(setShowGptPage())
-      }} bgColor={"red.600"} css={":hover{color:black}"}  color={"white"}> <Text mx={"5px"}>GPT SEARCH </Text> <AiOutlineSearch  fontSize={"20px"}/></Button>
+    <Link to={'/search'}>  <Button size={"sm"} display={"flex"} justifyContent={"center"} variant={"unstyled"} css={":hover{color:red}"}   color={"white"} > <AiOutlineSearch    fontSize={"26px"}/></Button></Link>
       <Button mr={"10px"} variant={"unstyled"} onClick={()=>{
         setShowDrawer(!showDrawer);
       }} >

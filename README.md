@@ -1,7 +1,49 @@
-This project was bootstrapped with
-[Create React App](https://github.com/facebook/create-react-app).
+Install create React-app
+### npm i create-react-app 
+Install chakra ui 
+### npm i @chakra-ui/react @emotion/react @emotion/styled framer-motion
+Install Redux Tool Kit
+### npm install @reduxjs/toolkit react-redux
+To start project
+### npm start
 
-## Available Scripts
+
+COMPONENTS:
+Header
+Sign in
+Sign Up
+Firebase-Auth for Sign In /Sign Up
+TMDB MOVIE API
+Home 
+  - MainContainer
+     - Background Playing Video
+     - Video Info Show On Video
+  - Second Container
+     - Card Slider using React Multi Carousel
+     - Movie Card Create 
+         - Tranding Movies
+         - Popular Movies
+         - Tranding Movies
+
+Watch Page
+ - Video Player
+ - Video Info
+
+Search Page 
+  - Search Bar
+  - Chat Gpt Integration For Movie Suggestion
+  - Card Slider For Movies
+
+
+
+
+
+
+
+<!-- This project was bootstrapped with
+[Create React App](https://github.com/facebook/create-react-app). -->
+
+<!-- ## Available Scripts
 
 In the project directory, you can run:
 
@@ -56,4 +98,4 @@ customize it when you are ready for it.
 You can learn more in the
 [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+To learn React, check out the [React documentation](https://reactjs.org/). -->

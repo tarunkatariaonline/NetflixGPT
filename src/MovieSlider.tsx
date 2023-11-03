@@ -2,6 +2,7 @@ import { Box ,Text,HStack} from '@chakra-ui/react'
 import React from 'react'
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
+import { Link } from 'react-router-dom';
 interface MovieData{
     id:number,
     original_title:string,
@@ -50,10 +51,13 @@ const MovieSlider = ({title,movie}:Props) => {
         <Carousel responsive={responsive} >
        
       
+      
        
        
        {movie.map((item)=>{
-        return  (item.poster_path&&<Box key={item.id} cursor={"pointer"} css={":hover{border:2px solid red}"}  zIndex={25} mx={"10px"} bgImage={"https://image.tmdb.org/t/p/original/"+item.poster_path} backgroundRepeat={"no-repeat"} backgroundSize={"cover"}   my={"20px"} w={["120px","140px"]} h={["200px"]} bgColor={"yellow"}></Box>) 
+        return  (item.poster_path&& <Link key={item.id}  to={'/video/watch/'+item.id}><Box cursor={"pointer"} css={":hover{border:2px solid red}"}  zIndex={25} mx={"10px"} bgImage={"https://image.tmdb.org/t/p/original/"+item.poster_path} backgroundRepeat={"no-repeat"} backgroundSize={"cover"}   my={"20px"} w={["120px","140px"]} h={["200px"]} bgColor={"gray"}></Box>
+        
+        </Link>) 
        })}
       
        

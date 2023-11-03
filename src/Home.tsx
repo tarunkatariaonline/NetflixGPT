@@ -17,45 +17,24 @@ import usePopularMovies from './Hooks/usePopularMovies';
 import useTopRatedMovies from './Hooks/useTopRatedMovies';
 import SearchGptPage from './SearchGptPage';
 import Loader from './Loader';
+import useUserAuth from './Hooks/useUserAuth';
 const Home = () => {
   const app = initializeApp(firebaseConfig);
   const auth = getAuth()
   const analytics = getAnalytics(app);
   const dispatch = useDispatch();
   const navicate = useNavigate()
+  useUserAuth();
   useNowPlayingMovie()
   usePopularMovies();
   useTopRatedMovies();
-  const showGpt = useSelector((state:any)=>state.showGptPage.value)
+  // const showGpt = useSelector((state:any)=>state.showGptPage.value)
   const videoInfo = useSelector((state:any)=>state?.mainVideo?.data);
   // console.log(showGpt)
 
-  useEffect(()=>{
+ 
     
-    onAuthStateChanged(auth, (user) => {
-      if (user) {
-        // User is signed in, see docs for a list of available properties
-        // https://firebase.google.com/docs/reference/js/auth.user
-        const obj={
-          displayName:(user.displayName),
-          email:(user.email),
-          uid:(user.uid),
-          photoURL:(user.photoURL)
-        }
-      
-        dispatch(addUserDetails(obj));
-        // navicate('/browse')
-        // ...
-
-    
-      }else{
-        //if user is not sign in 
-        navicate('/')
-      } 
-    });
-
-
-  },[])
+   
 
   if(videoInfo===null){
     return <Loader/>
@@ -63,13 +42,13 @@ const Home = () => {
   return (
 
 <>
-{!(showGpt)?<Box w={"100%"} h={"100vh"} bgColor={"white"} >
+<Box w={"100%"} h={"100vh"} bgColor={"black"} >
       <Box pos={"absolute"} top={"0px"} w={"100%"} zIndex={10}>
   <Header/>
   </Box>
   <MainContainer/>
   <SecondContainer/>
-    </Box>:<SearchGptPage/>}
+    </Box>
     
     </>  
   )

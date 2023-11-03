@@ -8,14 +8,16 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setSuggestionMovies } from './Redux/Slice/showGptPageSlice';
 import MovieSlider from './MovieSlider';
 import Loader from './Loader';
+import useUserAuth from './Hooks/useUserAuth';
 const openai = new OpenAI({
-    apiKey: process.env.REACT_APP_OPEN_AI_API_KEY, 
+    apiKey:process.env.REACT_APP_OPEN_AI_API_KEY, 
     // defaults to process.env["OPENAI_API_KEY"]
     dangerouslyAllowBrowser: true 
   });
 const SearchGptPage = () => {
     const dispatch = useDispatch();
     const [loader,setLoader] = useState<boolean>(false);
+    useUserAuth();
     const gptSearchTextList = useSelector((state:any)=>state?.showGptPage?.searchSuggestionTextList)
     const gptSearchMovieList = useSelector((state:any)=>state?.showGptPage?.searchMovieResult)
     // console.log(gptSearchMovieList)
@@ -25,7 +27,7 @@ const SearchGptPage = () => {
     //  console.log("Search Results are here ");
     
     const searchMovieFetch = async (keyword:string)=>{
-     const res = await fetch(`https://api.themoviedb.org/3/search/movie?query=${keyword}&include_adult=false&language=en-US&page=1`,movieOptionsApi)
+     const res = await fetch(`https://api.themoviedb.org/3/search/movie?query=${keyword}&include_adult=true&language=en-US&page=1`,movieOptionsApi)
      const json = await res.json();
     return json.results;
     }
@@ -69,7 +71,7 @@ suggestList = chatCompletion.choices[0].message.content.split(",")
   return (
     <Box w={"100%"}    h={"100vh"} bgColor={"yellow"}>
 
-      <Image  w={"100%"} position={"fixed"} top={'0'} src='https://miro.medium.com/v2/resize:fit:1400/1*5lyavS59mazOFnb55Z6znQ.png' h={"100%"}/>
+      <Image  w={"100%"} position={"fixed"} objectFit={"cover"} top={'0'} src='https://miro.medium.com/v2/resize:fit:1400/1*5lyavS59mazOFnb55Z6znQ.png'  h={"100%"}/>
     
     <Box pos={"relative"} zIndex={"5"}>
        <Header/></Box>
@@ -82,11 +84,11 @@ suggestList = chatCompletion.choices[0].message.content.split(",")
     
          }}>
          <HStack justifyContent={"center"} w={"100%"} pos={"relative"} zIndex={"2"} >
-         <HStack bgColor={"gray.900"} my={"10px"} border={"1px solid white"}  borderRadius={"10px"} w={"60%"} h={"70px"} px={"20px"}>
-      <Input placeholder='Search Movies Here ' value={searchText} onChange={(e)=>{
+         <HStack bgColor={"gray.900"} my={"10px"} border={"2px solid red"}  w={["95%","60%"]} h={"70px"} px={"20px"}>
+      <Input borderRadius={"0px"} placeholder='Search Movies Here ' value={searchText} onChange={(e)=>{
        setSearchText(e.target.value)
       }} type='text' borderColor={"whiteAlpha.500"} h={"40px"}  bgColor={"white"} />
-      <Button type="submit" colorScheme="red">Search</Button>
+      <Button borderRadius={"0px"} type="submit" colorScheme="red">Search</Button>
       </HStack>
       </HStack>
       </form>

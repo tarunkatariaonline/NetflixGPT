@@ -5,7 +5,7 @@ import VideoInfo from './VideoInfo'
 
 export const MainContainer = () => {
   return (
-  <Box w={"100%"}  >
+  <Box w={"100%"} bgColor={"black"} >
   <VideoContainer/>
 
   </Box>
